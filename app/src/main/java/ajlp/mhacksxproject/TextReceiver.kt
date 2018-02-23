@@ -33,11 +33,6 @@ class TextReceiver : BroadcastReceiver() {
 
                 messages += "SMS from " + address + " :\n";
                 messages += body + "\n";
-
-                // Here you can add any your code to work with incoming SMS
-                // I added encrypting of all received SMS
-
-//                putSmsToDatabase( contentResolver, sms );
             }
 
             // Display SMS message
