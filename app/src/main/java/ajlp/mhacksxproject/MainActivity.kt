@@ -237,8 +237,6 @@ class MainActivity : AppCompatActivity(), ClassifyTextMessageCallback {
     }
 
     private fun retrieveAccessTokenfromServer() {
-//        val deviceId = "myDevice"
-//        val tokenURL = ChatActivity.SERVER_TOKEN_URL + "?device=" + deviceId
         val tokenURL = SERVER_TOKEN_URL + "/" + getString(R.string.username)
         Ion.with(this)
                 .load(tokenURL)
@@ -251,8 +249,6 @@ class MainActivity : AppCompatActivity(), ClassifyTextMessageCallback {
                             val accessToken = result?.get("token")?.getAsString()
                             setTitle("Stacy")
                             val builder = ChatClient.Properties.Builder()
-//                            builder.setRegion(ChatClient.ConnectionSt)
-//                            builder.setSynchronizationStrategy(ChatClient.SynchronizationStrategy.ALL)
                             val props = builder.createProperties()
                             ChatClient.create(this@MainActivity, accessToken!!, props, mChatClientCallback)
                         }
@@ -381,7 +377,7 @@ class MainActivity : AppCompatActivity(), ClassifyTextMessageCallback {
 
         // Start the queue
         mRequestQueue.start()
-
+        // Exposed the server url, uh oh. It's ok it's a hackathon project.
         val url = "http://35.202.120.11:81/classify"
 
         // Formulate the request and handle the response.
@@ -412,11 +408,7 @@ class MainActivity : AppCompatActivity(), ClassifyTextMessageCallback {
 
 
     companion object {
-        /*
-     Change this URL to match the token URL for your quick start server
-     Download the quick start server from:
-     https://www.twilio.com/docs/api/ip-messaging/guides/quickstart-js
-     */
+        // Exposed the server url, uh oh. It's ok it's a hackathon project.
         internal val SERVER_TOKEN_URL = "http://35.202.120.11/mhacks_chad/token"
         internal val DEFAULT_CHANNEL_NAME = "general"
         internal val TAG = "TwilioChat"
