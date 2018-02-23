@@ -22,10 +22,8 @@ import com.koushikdutta.ion.Ion
 import com.twilio.chat.*
 import kotlinx.android.synthetic.main.activity_chat.*
 
+// Class seems vaguely similar to Main, should separate server access in its own component.
 class ChatActivity:AppCompatActivity(){
-
-
-
 
     private var mMessagesRecyclerView:RecyclerView? = null
     private var mMessagesAdapter:MessagesAdapter? = null
@@ -80,8 +78,6 @@ class ChatActivity:AppCompatActivity(){
 
 
     private fun retrieveAccessTokenfromServer() {
-//        val deviceId = "myDevice"
-//        val tokenURL = SERVER_TOKEN_URL + "?device=" + deviceId
         val tokenURL = SERVER_TOKEN_URL + "/" + getString(R.string.username)
         Ion.with(this)
                 .load(tokenURL)
@@ -94,8 +90,6 @@ class ChatActivity:AppCompatActivity(){
                             val accessToken = result?.get("token")?.getAsString()
                             title = getString(R.string.otheruser)
                             val builder = ChatClient.Properties.Builder()
-//                            builder.setRegion(ChatClient.ConnectionSt)
-//                            builder.setSynchronizationStrategy(ChatClient.SynchronizationStrategy.ALL)
                             val props = builder.createProperties()
                             ChatClient.create(this@ChatActivity, accessToken!!, props, mChatClientCallback)
                         }
@@ -244,11 +238,7 @@ class ChatActivity:AppCompatActivity(){
 
 
     companion object {
-        /*
-     Change this URL to match the token URL for your quick start server
-     Download the quick start server from:
-     https://www.twilio.com/docs/api/ip-messaging/guides/quickstart-js
-     */
+        // Exposed the server url, uh oh. It's ok it's a hackathon project.
         internal val SERVER_TOKEN_URL = "http://35.202.120.11/mhacks_chad/token"
         internal val DEFAULT_CHANNEL_NAME = "general"
         internal val TAG = "TwilioChat"
